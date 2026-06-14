@@ -29,7 +29,7 @@ så UI'et altid får data i samme form.
 
 - **Next.js 14** (App Router) + **TypeScript**
 - **Tailwind CSS** — responsivt, mobilvenligt design
-- **Claude (`claude-opus-4-8`)** via `@anthropic-ai/sdk`
+- **Claude (`claude-sonnet-4-6`)** via `@anthropic-ai/sdk`
 - **mammoth** til Word-udtræk
 
 ## Kom i gang
