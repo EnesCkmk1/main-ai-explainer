@@ -65,8 +65,8 @@ export function UploadZone({
       <p className="mt-4 text-lg font-semibold">
         Træk dit dokument hertil, eller <span className="text-accent">vælg en fil</span>
       </p>
-      <p className="mt-1 text-sm text-muted">
-        PDF · Word (.docx) · billede / scan · tekstfil — op til 20 MB
+      <p className="mt-1.5 text-sm text-muted">
+        PDF, Word, et billede eller en scanning - op til 20 MB
       </p>
     </div>
   );
