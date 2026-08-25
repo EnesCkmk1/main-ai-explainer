@@ -31,16 +31,44 @@ function SectionTitle({
 export function ResultView({
   analyse,
   fileName,
+  demo = false,
   onReset,
 }: {
   analyse: Analyse;
   fileName: string;
+  demo?: boolean;
   onReset: () => void;
 }) {
   const paragraphs = analyse.forklaring.split(/\n{1,}/).filter((p) => p.trim());
 
   return (
     <div className="space-y-5">
+      {/* Demo-banner */}
+      {demo && (
+        <div className="flex items-start gap-3 rounded-xl border border-amber/30 bg-amber-soft/50 px-4 py-3">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="mt-0.5 shrink-0 text-amber"
+          >
+            <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" />
+            <path d="M12 8h.01M11 12h1v4h1" />
+          </svg>
+          <p className="text-sm leading-relaxed text-ink/80">
+            <span className="font-semibold">Demo-tilstand.</span> Der er ikke sat en
+            API-nøgle, så du ser en fast eksempel-analyse - ikke en analyse af din
+            egen fil. Tilføj <code className="rounded bg-paper/70 px-1 py-0.5 text-[0.8em]">ANTHROPIC_API_KEY</code>{" "}
+            for at analysere rigtige dokumenter.
+          </p>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="min-w-0">

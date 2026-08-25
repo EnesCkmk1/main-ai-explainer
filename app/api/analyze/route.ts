@@ -6,6 +6,7 @@ import {
   EmptyDocumentError,
 } from "@/lib/extract";
 import { ANALYSE_SCHEMA, type Analyse } from "@/lib/schema";
+import { DEMO_MODE, DEMO_ANALYSE } from "@/lib/demo";
 
 // Kør i Node-runtime (vi bruger Buffer + mammoth), og giv god tid til analysen.
 export const runtime = "nodejs";
@@ -30,12 +31,6 @@ const INSTRUCTION = `Analysér det vedhæftede dokument og udfyld felterne. Skri
 
 export async function POST(request: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    return NextResponse.json(
-      { error: "Serveren mangler en API-nøgle. Tilføj ANTHROPIC_API_KEY i .env.local." },
-      { status: 500 }
-    );
-  }
 
   let file: File | null = null;
   try {
@@ -71,6 +66,14 @@ export async function POST(request: Request) {
       { error: "Kunne ikke læse dokumentets indhold." },
       { status: 400 }
     );
+  }
+
+  // Demo-mode: uden en API-nøgle returnerer vi en færdig eksempel-analyse i
+  // stedet for at kalde Claude. Filen er allerede valideret ovenfor, så
+  // uploaden føles ægte - men indholdet analyseres ikke.
+  if (DEMO_MODE || !apiKey) {
+    await new Promise((r) => setTimeout(r, 900)); // lille pause så loading-animationen ses
+    return NextResponse.json({ analyse: DEMO_ANALYSE, demo: true });
   }
 
   // 2) Byg beskedens indhold til Claude.
