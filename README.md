@@ -6,6 +6,7 @@
 
 Upload a document and have it translated from legalese into something you actually understand.
 
+[![Live demo](https://img.shields.io/badge/Live_demo-dokument--ai-1F6F5C?logo=vercel&logoColor=white)](https://dokument-ai-neon.vercel.app)
 ![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38BDF8?logo=tailwindcss&logoColor=white)
@@ -15,6 +16,18 @@ Upload a document and have it translated from legalese into something you actual
 </div>
 
 > **Note:** The app's user interface and analysis output are in **Danish** — it's a tool for understanding Danish documents. This README is in English for international readers.
+
+---
+
+## Live demo
+
+**[Try it → dokument-ai-neon.vercel.app](https://dokument-ai-neon.vercel.app)**
+
+Upload a document, get a plain-Danish explanation, important points, deadlines and warnings. The public deploy runs in demo mode (no API key), so you can try the full flow without setting anything up.
+
+![Dokument-AI demo: upload a document and get a plain-Danish explanation](docs/dokument-ai-demo.gif)
+
+[Watch the full video (MP4)](docs/dokument-ai-demo.mp4)
 
 ---
 
@@ -115,6 +128,9 @@ lib/
   extract.ts             # Extract content from PDF/image/Word/text
   schema.ts              # JSON schema + types for the analysis
   demo.ts                # Sample analysis used in demo mode
+docs/
+  dokument-ai-demo.gif   # README preview of the upload → result flow
+  dokument-ai-demo.mp4   # Full-quality screen recording
 ```
 
 ## Scripts
