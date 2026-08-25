@@ -113,3 +113,7 @@ lib/
 | `npm run build` | Byg til produktion |
 | `npm run start` | Kør produktions-build |
 | `npm run lint` | Kør linter |
+
+## Licens
+
+Udgivet under [MIT-licensen](LICENSE).
