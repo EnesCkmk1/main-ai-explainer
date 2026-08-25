@@ -2,126 +2,130 @@
 
 # 📄 Dokument-AI
 
-**Forstå kontrakter, tilbud, forsikringspapirer og breve — forklaret på almindeligt dansk.**
+**Understand contracts, offers, insurance papers and letters — explained in plain Danish.**
 
-Upload et dokument og få det oversat fra jura-sprog til noget, du faktisk forstår.
+Upload a document and have it translated from legalese into something you actually understand.
 
 ![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38BDF8?logo=tailwindcss&logoColor=white)
 ![Claude](https://img.shields.io/badge/Claude-Anthropic-D97757)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 </div>
 
+> **Note:** The app's user interface and analysis output are in **Danish** — it's a tool for understanding Danish documents. This README is in English for international readers.
+
 ---
 
-## Hvad kan den?
+## What does it do?
 
-Du uploader et dokument, og systemet:
+You upload a document, and the app:
 
-- 🗣️ **forklarer** det på et sprog, du forstår — uden jura-floskler
-- ⭐ **fremhæver** de vigtigste punkter
-- 📅 **finder** frister, datoer og deadlines
-- 📝 **skriver** et kort resumé
-- ⚠️ **advarer** om ting, du bør være ekstra opmærksom på (gebyrer, bindingsperioder, automatisk fornyelse …)
+- 🗣️ **explains** it in language you understand — no legal jargon
+- ⭐ **highlights** the most important points
+- 📅 **finds** deadlines, dates and due dates
+- 📝 **writes** a short summary
+- ⚠️ **warns** about things to pay extra attention to (fees, lock-in periods, automatic renewal …)
 
-Nyttigt for både private og virksomheder.
+Useful for individuals and businesses alike.
 
-> **Bemærk:** Dokument-AI giver en hjælpsom forklaring, men er **ikke** juridisk rådgivning. Er du i tvivl, så kontakt en fagperson.
+> **Disclaimer:** Dokument-AI gives a helpful explanation, but it is **not** legal advice. When in doubt, consult a professional.
 
-## 🧪 Demo-tilstand
+## 🧪 Demo mode
 
-Uden en API-nøgle kører appen i **demo-tilstand**: den viser en fast eksempel-analyse
-i stedet for at kalde Claude. Det gør, at projektet kan deployes og prøves offentligt
-uden en rigtig nøgle — upload en vilkårlig fil og se, hvordan resultatet ser ud.
+Without an API key the app runs in **demo mode**: it shows a fixed example analysis
+instead of calling Claude. This lets the project be deployed and tried publicly
+without a real key — upload any file and see what the result looks like.
 
-Sæt `ANTHROPIC_API_KEY` (se nedenfor) for at analysere rigtige dokumenter.
+Set `ANTHROPIC_API_KEY` (see below) to analyze real documents.
 
-## Understøttede filtyper
+## Supported file types
 
-| Filtype | Håndtering |
+| File type | Handling |
 | --- | --- |
-| **PDF** | Læses direkte af Claude |
-| **Billede / scan** (JPG, PNG, GIF, WebP) | Læses direkte af Claude (vision) |
-| **Word** (`.docx`) | Tekst trækkes ud med `mammoth` |
-| **Tekstfil** (`.txt`) | Læses som ren tekst |
+| **PDF** | Read directly by Claude |
+| **Image / scan** (JPG, PNG, GIF, WebP) | Read directly by Claude (vision) |
+| **Word** (`.docx`) | Text extracted with `mammoth` |
+| **Text file** (`.txt`) | Read as plain text |
 
-Maks. filstørrelse: **20 MB**.
+Max file size: **20 MB**.
 
-## Sådan virker det
+## How it works
 
 ```
-   Upload  ──►  /api/analyze  ──►  Claude  ──►  Struktureret JSON  ──►  UI
- (browser)     (server-route)    (Anthropic)     (fast skema)        (sektioner)
+   Upload  ──►  /api/analyze  ──►  Claude  ──►  Structured JSON  ──►  UI
+ (browser)     (server route)   (Anthropic)     (fixed schema)      (sections)
 ```
 
-Analysen kører **server-side** via en Next.js route handler (`app/api/analyze`), så
-API-nøglen aldrig kommer ud i browseren. Claude svarer i et fast JSON-skema
-(structured outputs), så UI'et altid får data i samme form — resumé, forklaring,
-vigtige punkter, datoer og advarsler.
+The analysis runs **server-side** in a Next.js route handler (`app/api/analyze`), so
+the API key never reaches the browser. Claude responds in a fixed JSON schema
+(structured outputs), so the UI always gets data in the same shape — summary,
+explanation, important points, dates and warnings.
 
-## Teknologi
+## Tech stack
 
 - **Next.js 14** (App Router) + **TypeScript**
-- **Tailwind CSS** — responsivt, mobilvenligt design
+- **Tailwind CSS** — responsive, mobile-friendly design
 - **Claude** (`claude-sonnet-4-6`) via [`@anthropic-ai/sdk`](https://www.npmjs.com/package/@anthropic-ai/sdk)
-- **mammoth** til udtræk af tekst fra Word
+- **mammoth** for extracting text from Word documents
 
-## Kom i gang
+## Getting started
 
-**1. Installer afhængigheder**
+**1. Install dependencies**
 
 ```bash
 npm install
 ```
 
-**2. Opret `.env.local` og indsæt din Anthropic-nøgle**
+**2. Create `.env.local` and add your Anthropic key** *(optional — skip it to run in demo mode)*
 
 ```bash
 cp .env.local.example .env.local
-# rediger .env.local og indsæt din rigtige nøgle
+# edit .env.local and paste your real key
 ```
 
 ```dotenv
 ANTHROPIC_API_KEY=sk-ant-...
 ```
 
-> Din nøgle bliver **aldrig** committet — `.env.local` er med i `.gitignore`.
-> Du får en nøgle på [console.anthropic.com](https://console.anthropic.com/).
+> Your key is **never** committed — `.env.local` is in `.gitignore`.
+> Get a key at [console.anthropic.com](https://console.anthropic.com/).
 
-**3. Start udviklingsserveren**
+**3. Start the dev server**
 
 ```bash
 npm run dev
 ```
 
-**4. Åbn** [http://localhost:3000](http://localhost:3000)
+**4. Open** [http://localhost:3000](http://localhost:3000)
 
-## Projektstruktur
+## Project structure
 
 ```
 app/
-  api/analyze/route.ts   # Sikker server-route der kalder Claude
+  api/analyze/route.ts   # Secure server route that calls Claude
   layout.tsx             # Fonts + metadata
-  page.tsx               # Forside med upload + resultat
-  globals.css            # Globale styles
+  page.tsx               # Home page with upload + result
+  globals.css            # Global styles
 components/
   UploadZone.tsx         # Drag & drop upload
-  ResultView.tsx         # Viser analysen i sektioner
+  ResultView.tsx         # Renders the analysis in sections
 lib/
-  extract.ts             # Udtræk indhold fra PDF/billede/Word/tekst
-  schema.ts              # JSON-skema + typer for analysen
+  extract.ts             # Extract content from PDF/image/Word/text
+  schema.ts              # JSON schema + types for the analysis
+  demo.ts                # Sample analysis used in demo mode
 ```
 
 ## Scripts
 
-| Kommando | Beskrivelse |
+| Command | Description |
 | --- | --- |
-| `npm run dev` | Start udviklingsserver |
-| `npm run build` | Byg til produktion |
-| `npm run start` | Kør produktions-build |
-| `npm run lint` | Kør linter |
+| `npm run dev` | Start the dev server |
+| `npm run build` | Build for production |
+| `npm run start` | Run the production build |
+| `npm run lint` | Run the linter |
 
-## Licens
+## License
 
-Udgivet under [MIT-licensen](LICENSE).
+Released under the [MIT License](LICENSE).
