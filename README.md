@@ -29,6 +29,14 @@ Nyttigt for både private og virksomheder.
 
 > **Bemærk:** Dokument-AI giver en hjælpsom forklaring, men er **ikke** juridisk rådgivning. Er du i tvivl, så kontakt en fagperson.
 
+## 🧪 Demo-tilstand
+
+Uden en API-nøgle kører appen i **demo-tilstand**: den viser en fast eksempel-analyse
+i stedet for at kalde Claude. Det gør, at projektet kan deployes og prøves offentligt
+uden en rigtig nøgle — upload en vilkårlig fil og se, hvordan resultatet ser ud.
+
+Sæt `ANTHROPIC_API_KEY` (se nedenfor) for at analysere rigtige dokumenter.
+
 ## Understøttede filtyper
 
 | Filtype | Håndtering |

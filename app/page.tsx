@@ -55,6 +55,7 @@ export default function Home() {
   const [analyse, setAnalyse] = useState<Analyse | null>(null);
   const [fileName, setFileName] = useState("");
   const [error, setError] = useState("");
+  const [demo, setDemo] = useState(false);
 
   async function analyze(file: File) {
     setStatus("loading");
@@ -73,6 +74,7 @@ export default function Home() {
         return;
       }
       setAnalyse(data.analyse as Analyse);
+      setDemo(Boolean(data.demo));
       setStatus("done");
     } catch {
       setError("Kunne ikke få forbindelse til serveren. Tjek din internetforbindelse.");
@@ -161,7 +163,7 @@ export default function Home() {
         )}
 
         {status === "done" && analyse && (
-          <ResultView analyse={analyse} fileName={fileName} onReset={reset} />
+          <ResultView analyse={analyse} fileName={fileName} demo={demo} onReset={reset} />
         )}
       </section>
 
